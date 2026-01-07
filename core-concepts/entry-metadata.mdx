@@ -1,0 +1,13 @@
+---
+title: 'Entry Metadata'
+---
+
+### Entry Metadata (S_FDM_EntryMetada)
+
+![image26](/images/image26.png)
+
+This structure determines the position of the object you add to the menu and which widget will represent it. You can expand this structure as needed. I've added Icon, Size and Transform settings because I thought you might need them but WidgetSlotClass must implement those settings.
+
+- **SlotTag**: This tag determines which container the entry widget will be placed in. Make sure the tag you use here is also defined in Config > Layout Data.  
+  You can use pre-defined tag like **FDM.Layout.Up.1** or **FDM.Layout.2** or you can create tags like **FDM.Layout.Throwables.Grenade**  
+- **WidgetSlotClass**: The class for the widget to be created and used for entry. It must implement the `WBPI_FDM_EntrySlot` interface. You can use example slot widgets or create your own widgets.

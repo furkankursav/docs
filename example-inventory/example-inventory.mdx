@@ -1,0 +1,76 @@
+---
+title: 'Example Inventory & Item System'
+---
+Before diving into the core concepts of Flexible Directional Menu (FDM), it is helpful to understand the example item and inventory system used throughout this documentation. This example demonstrates how game objects can act as entry sources for the menu in a clean, data-driven, and decoupled way.
+
+This inventory & item system is **only an example** and is not required to use FDM. It is in the FlexibleDirectionalMenu/ExampleItems location and you can delete this folder if you don’t want to use it. It exists to illustrate a recommended integration pattern.
+
+![image13](/images/image13.png)
+
+### Item Definitions
+
+All items in the example project are defined using a Primary Data Asset:
+
+![image14](/images/image14.png)
+
+**`PDA_FDM_ExampleItemDefinitionBase`**
+
+This data asset represents the *static definition* of an item and contains data such as:
+
+- Item Name  
+- Entry Metadata (used by FDM)  
+- Any other default properties relevant to the item  
+
+This asset does **not** represent an item owned by the player. It only describes what the item is.
+
+![image15](/images/image15.png)
+
+![image16](/images/image16.png)
+
+Example items are in `FlexibleDirectionalMenu/ExampleItems/Items`.
+
+### Item Instances
+
+When an item is added to the player’s inventory, an instance object is created:
+
+![image17](/images/image17.png)
+
+**`BP_FDM_ExampleItemInstance`**
+
+- Inherits from `UObject`  
+- Represents a single owned instance of an item  
+- Is constructed at runtime from a definition asset  
+- Copies default values from the definition during initialization  
+- Implements the interface `BPI_FDM_EntrySourceObject`  
+
+The instance implements the interface:
+
+**`BPI_FDM_EntrySourceObject`**
+
+This interface exposes a function called **Get Entry Metadata**.
+
+The instance simply returns the Entry Metadata stored in its definition asset.
+
+![image18](/images/image18.png)
+
+This allows FDM to remain completely unaware of what the object represents (weapon, item, ability, etc.) and only consume the metadata it needs for layout and behavior.
+
+### Inventory Integration
+
+The example inventory system is implemented using:
+
+**`AC_FDM_ExampleInventoryComponent`**
+
+This component:
+
+- Contains an array called **Starting Items**  
+- This array holds references to `PDA_ExampleItemDefinitionBase` assets  
+- On inventory initialization:  
+  - Each definition is used to construct a corresponding Instance Class  
+  - These instances are stored internally in the inventory  
+
+When an item instance is added to the inventory, “Set Owning Actor” function of `BP_FDM_ExampleItemInstance` gets called. Inside that function, the instance retrieves the owner actor, accesses the menu component and it calls “Add New Entry” function.
+
+![image19](/images/image19.png)
+
+and passes itself(self) as the Source Object. Because the instance implements `BPI_FDM_EntrySourceObject`, the FDM system can query its metadata without knowing anything about the item’s type, purpose, or internal logic.

@@ -1,0 +1,23 @@
+---
+title: 'Public API'
+---
+
+| Name | Description | Params | Returns | Triggered Events |
+|------|-------------|--------|---------|------------------|
+| Initialize FDM Component | Initializes the component, loads config, initializes layout, resolves the widget instance, and binds events. | - | - | OnFDMInitialized |
+| Is FDM Initialized | Return true if the component initialization is completed | - | bInitialized (boolean) | - |
+| FDM Directional Input | Shows the menu if it’s hidden then processes the directional input depending on the given direction. | Direction (E_FDM_Direction) | - | - |
+| Bind Navigation Mapping Context | Applies Navigation Mapping Context with defined priority to Player Input | - | - | - |
+| Unbind Navigation Mapping Context | Removes Navigation Mapping Context from Player Input. | - | - | - |
+| Request Show Menu | Requests menu to become visible (and cancels auto-hide timer if needed). | - | - | - |
+| Request Hide Menu | Requests menu to become hidden immediately. | - | - | - |
+| Add New Entry | Adds a new entry using a source object implementing `BPI_FDM_EntrySourceObject`. | Source Object (Object) | bAdded (boolean) | OnNewEntryAdded |
+| Remove Entry | Removes an entry from the menu. | EntryToRemove (Object) | bSuccess (boolean) | OnEntryPlacementsChanged |
+| Move Entry to Location | Moves an entry to a new location. Clamps the target location before moving. If there is already an entry in the target location, it swaps their location. | EntryToMove (Object), TargetLocation (S_FDM_EntryLocation) | bSuccess (boolean) | OnEntryPlacementsChanged |
+| Swap Entry Locations | Swaps locations of two entries. | FirstObject (Object), SecondObject (Object) | bSuccess (boolean) | OnEntryPlacementsChanged |
+| Get Entry Location | Returns location of an entry | Entry (Object) | Location (S_FDM_EntryLocation) | - |
+| Get Entry at Location | Returns the entry at the given location, or null. | Location (S_FDM_EntryLocation) | Entry (Object) | - |
+| Get Random Entry | Returns a random entry | - | Entry (Object) | - |
+| Get Random Entry Location | Returns a random location | - | Location (S_FDM_EntryLocation) | - |
+| Get First Entry In Container | Returns the first entry in the given container location | InContainer (S_FDM_ContainerLocation) | Entry (Object) | - |
+| Get Last Entry In Container | Returns the last entry in the given container location | InContainer (S_FDM_ContainerLocation) | Entry (Object) | - |

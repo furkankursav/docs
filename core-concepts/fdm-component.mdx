@@ -1,0 +1,162 @@
+### AC_FDM_Component (Actor Component)
+
+It is the logical controller of the system. It manages entries, locations, selection, input handling, state and menu visibility. You should place it on your player character/controller.
+
+### Initialization
+
+AC_FDM_Component expects a valid Data Asset derived from PDA_FDM_ConfigBase from the user.  
+![image27](/images/image27.png)
+
+and you need to call the initialization function **On Begin Play** or when your character/controller is ready.  
+![image28](/images/image28.png)
+
+This function stores the preferences from the Config asset and, after creating the layout based on the layout data, it initializes the widget.
+
+### Input Handling
+
+AC_FDM_Component does not listen for navigation inputs; it only listens for container open/close inputs. It leaves the task of listening for navigation inputs and calling functions based on those inputs to the user.
+
+As I mentioned in the Quick Start section, you need to implement `IA_FDM_SelectUp`, `IA_FDM_SelectDown`, `IA_FDM_SelectLeft`, `IA_FDM_SelectRight` input action events in your character/player controller.  
+Then you need to call FDM Directional Input function on Triggered Event with corresponding direction input  
+![image29](/images/image29.png)
+
+| IA_FDM_SelectUp | Up |
+| :---- | :---- |
+| IA_FDM_SelectDown | Down |
+| IA_FDM_SelectLeft | Left |
+| IA_FDM_SelectRight | Right |
+
+By default, FDM Component applies Navigation Mapping Context to Player Input automatically after the initialization, but you might not always want to apply the mapping context at the beginning, so you have the option to disable it from within the config asset.  
+![image30](/images/image30.png)
+
+If you turn off “Auto Bind Navigation Mapping Context” which is enabled by default in the configuration asset, you need to call the “Bind Navigation Mapping Context” function of AC_FDM_Component after the initialization.   
+![image31](/images/image31.png)
+
+and you can call the unbinding function whenever you want.  
+![image32](/images/image32.png)
+
+Unlike the navigation inputs, the slot changing input is handled automatically.  
+![image33](/images/image33.png)
+
+You can change the hold duration in the configuration asset.  
+![image34](/images/image34.png)
+
+And the component throws some events during the container opening/closing process.
+
+- **On Slot Action Started:** When you start holding down the button  
+- **On Slot Action Progress(float):** When pressing the button and the container has not yet opened  
+- **On Slot Action Triggered:** When you press and hold the button long enough  
+- **On Slot Action Completed:** When you held the button enough  
+- **On Slot Action Cancelled:** When you release the button before you hold it enough.  
+- **On Switch Slot Menu Changed:** When you open or close a container.
+
+You can see this process  in AC_FDM_Component > Input Handling Graph.  
+![image35](/images/image35.png)
+
+### Responsibilities
+
+`AC_FDM_Component` manages the menu’s entries and their placements. It supports runtime operations such as:
+
+- Add entries  
+- Remove entries  
+- Move entries to new locations  
+- Swap entry locations  
+
+Entries are standard `UObject` instances that implement the entry interface `BPI_FDM_Entry`. The component treats entries as **data + behavior providers**, while the UI is responsible for visualization.
+
+#### Adding Entry
+
+![image36](/images/image36.png)
+
+When a new entry has been added, “On Entry Added” interface function gets called on SourceObject and the “OnNewEntryAdded(Added Entry)”  event gets triggered.
+
+#### Removing Entry
+
+![image37](/images/image37.png)
+
+When you remove an entry, “On Entry Removed” interface function gets called and the “OnEntryPlacementsChanged(ChangedEntries)” event gets triggered.
+
+#### Getting An Entry / Location
+
+You can use some query functions for that.
+
+![image38](/images/image38.png)
+
+![image39](/images/image39.png)
+
+#### Changing An Entry’s Location
+
+You can use “Move Entry To Location” to move an entry to a specific location. If there is already an entry in the new location, it will swap their locations automatically.
+
+![image40](/images/image40.png)
+
+or you can swap 2 entry locations using “Swap Entry Locations” function.
+
+![image41](/images/image41.png)
+
+When an entry’s location has been changed, “On Entry Placements Changed” event gets triggered
+
+
+#### Location & Placement
+
+`AC_FDM_Component` does not hardcode where entries should be placed.  
+Instead, it uses layout configuration data to determine placement rules at runtime.
+
+Each entry provides entry metadata and the component resolves a suitable container location based on the active configuration.
+
+![image42](/images/image42.png)  
+![image43](/images/image43.png)
+
+The order of layout definitions inside the layout data is significant.
+
+Layout Data entries are processed sequentially in the order they appear in the configuration. The first matching layout entry will be used first when creating a placement for a container.
+
+This means that layout definitions earlier in the list have higher priority and will be created first.
+
+Example:
+
+Consider the following layout configuration entries:
+
+- `FDM.Layout.Right.1`  
+- `FDM.Layout.Right.2`  
+
+Since `FDM.Layout.Right.1` added before `FDM.Layout.Right.2` in the configuration, it will:
+
+- Be initialized earlier  
+- Appear closer to the center of the menu  
+
+As a result, `FDM.Layout.Right.1` will be placed closer to the D-Pad center than `FDM.Layout.Right.2`.
+
+![image44](/images/image44.png)
+
+but if you put the `FDM.Layout.Right.2` above in Layout Data, the menu will look like that.
+
+![image45](/images/image45.png)
+
+In other words, the numbers in the slot tags are not subject to any sequential ordering. What matters is the order in the Layout Data.
+
+Also, you don't have to use direction and container indexes to these tags as in the example. If you wish, you can use tags like `FDM.Layout.Riffle`, `FDM.Layout.Pistol`, `FDM.Layout.Throwables`. 
+
+This ordering rule allows designers to control layout order simply by rearranging layout entries in the configuration, without changing code.
+
+The component maintains the mapping between:
+
+- Entry(Object) -> Location(S_FDM_EntryLocation)  
+- Container Location(S_FDM_ContainerLocation) -> Slot Count(int)  
+- Container Location(S_FDM_ContainerLocation) -> Active Slot Index(int)  
+
+This ensures fast queries in both directions and enables robust runtime operations like add/remove/swap/move.
+
+A container location represents:
+
+- Direction(Up, Right, Down, Left)  
+- Container Index within that direction 
+
+![image46](/images/image46.png)
+
+These are the slot containers. The number represents the container index.
+
+and these are the slot widgets in the Left, 0 container.
+
+Direction, Container Index, Slot Index.
+![image47](/images/image47.png)

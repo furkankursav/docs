@@ -1,0 +1,65 @@
+---
+title: 'Location & Placement'
+---
+`AC_FDM_Component` does not hardcode where entries should be placed.  
+Instead, it uses layout configuration data to determine placement rules at runtime.
+
+Each entry provides entry metadata and the component resolves a suitable container location based on the active configuration.
+
+![image42](/images/image42.png)  
+![image43](/images/image43.png)
+
+The order of layout definitions inside the layout data is significant.
+
+Layout Data entries are processed sequentially in the order they appear in the configuration. The first matching layout entry will be used first when creating a placement for a container.
+
+This means that layout definitions earlier in the list have higher priority and will be created first.
+
+Example:
+
+Consider the following layout configuration entries:
+
+- `FDM.Layout.Right.1`  
+- `FDM.Layout.Right.2`  
+
+Since `FDM.Layout.Right.1` added before `FDM.Layout.Right.2` in the configuration, it will:
+
+- Be initialized earlier  
+- Appear closer to the center of the menu  
+
+As a result, `FDM.Layout.Right.1` will be placed closer to the D-Pad center than `FDM.Layout.Right.2`.
+
+![image44](/images/image44.png)
+
+but if you put the `FDM.Layout.Right.2` above in Layout Data, the menu will look like that.
+
+![image45](/images/image45.png)
+
+In other words, the numbers in the slot tags are not subject to any sequential ordering. What matters is the order in the Layout Data.
+
+Also, you don't have to use direction and container indexes to these tags as in the example. If you wish, you can use tags like `FDM.Layout.Riffle`, `FDM.Layout.Pistol`, `FDM.Layout.Throwables`. 
+
+This ordering rule allows designers to control layout order simply by rearranging layout entries in the configuration, without changing code.
+
+The component maintains the mapping between:
+
+- Entry(Object) -> Location(S_FDM_EntryLocation)  
+- Container Location(S_FDM_ContainerLocation) -> Slot Count(int)  
+- Container Location(S_FDM_ContainerLocation) -> Active Slot Index(int)  
+
+This ensures fast queries in both directions and enables robust runtime operations like add/remove/swap/move.
+
+A container location represents:
+
+- Direction(Up, Right, Down, Left)  
+- Container Index within that direction  
+
+![image46](/images/image46.png)
+
+These are the slot containers. The number represents the container index.
+
+and these are the slot widgets in the Left, 0 container. 
+
+Direction, Container Index, Slot Index.
+
+![image47](/images/image47.png)

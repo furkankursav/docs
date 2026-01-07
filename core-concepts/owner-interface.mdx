@@ -1,0 +1,28 @@
+---
+title: 'FDM Component Owner Interface'
+---
+
+## BPI_FDM_ComponentOwner (Blueprint Interface)
+
+`BPI_FDM_ComponentOwner` is an optional interface that can be implemented by the owner of `AC_FDM_Component` to provide a reference to an externally managed FDM Widget instance.
+
+By default, Flexible Directional Menu can spawn and manage its own main UI wrapper (`WBP_FDM_MainHUD`) and retrieve the internal `WBP_FDM_Widget` automatically. This behavior is controlled by the **Use System Defined Main Widget** option in the primary config.
+
+When **Use System Defined Main Widget is disabled**, the system expects the project to provide its own instance of `WBP_FDM_Widget`. In this case, the component cannot assume where or how the widget is created, and therefore relies on the `BPI_FDM_ComponentOwner` interface to retrieve it.
+
+This interface has a single function:
+
+`Get FDM Widget`  
+![image50](/images/image50.png)
+
+### When should this interface be implemented?
+
+You should implement `BPI_FDM_ComponentOwner` if:
+
+- You are embedding `WBP_FDM_Widget` into your own main HUD (e.g. `WBP_GameplayHUD`),  
+- You have disabled **Use System Defined Main Widget** in the config,  
+- Or your UI hierarchy is custom and the component cannot automatically find the menu widget.
+
+In typical advanced UI setups, the project already has a main gameplay HUD widget that contains all major UI elements such as health, ammo, minimap, and other interface systems. In such cases, the Flexible Directional Menu widget is expected to be part of this main HUD rather than being created and added to the viewport by the component.
+
+The `BPI_FDM_ComponentOwner` interface allows the component to retrieve this externally managed widget instance in a clean, decoupled, and architecture-agnostic way.

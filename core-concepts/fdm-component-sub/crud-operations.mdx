@@ -1,0 +1,43 @@
+---
+title: 'CRUD Operations'
+---
+`AC_FDM_Component` manages the menu’s entries and their placements. It supports runtime operations such as:
+
+- Add entries  
+- Remove entries  
+- Move entries to new locations  
+- Swap entry locations  
+
+Entries are standard `UObject` instances that implement the entry interface `BPI_FDM_Entry`. The component treats entries as **data + behavior providers**, while the UI is responsible for visualization.
+
+#### Adding Entry
+
+![image36](/images/image36.png)
+
+When a new entry has been added, “On Entry Added” interface function gets called on SourceObject and the “OnNewEntryAdded(Added Entry)”  event gets triggered.
+
+#### Removing Entry
+
+![image37](/images/image37.png)
+
+When you remove an entry, “On Entry Removed” interface function gets called and the “OnEntryPlacementsChanged(ChangedEntries)” event gets triggered.
+
+#### Getting An Entry / Location
+
+You can use some query functions for that.
+
+![image38](/images/image38.png)
+
+![image39](/images/image39.png)
+
+#### Changing An Entry’s Location
+
+You can use “Move Entry To Location” to move an entry to a specific location. If there is already an entry in the new location, it will swap their locations automatically.
+
+![image40](/images/image40.png)
+
+or you can swap 2 entry locations using “Swap Entry Locations” function.
+
+![image41](/images/image41.png)
+
+When an entry’s location has been changed, “On Entry Placements Changed” event gets triggered

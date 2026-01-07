@@ -1,58 +1,41 @@
 ---
-title: "Introduction"
-description: "Flexible Directional Menu (FDM) is a modular, data-driven, and fully extensible directional selection system designed for Unreal Engine projects. It enables developers to build complex directional menus similar to those found in modern AAA titles, while remaining fully customizable and decoupled from game logic and UI layout. The system is implemented entirely in Blueprints and is compatible with Unreal Engine 5.1 and above.
-FDM is designed for both single-player and multiplayer projects. The menu system itself does not perform any network replication by default, allowing it to be safely used in networked environments while leaving authoritative state and replication control to the game’s own logic. Developers can freely integrate FDM with replicated inventory, ability, or interaction systems as needed.
-The system follows a strict separation of concerns: gameplay data defines what appears in the menu, the component controls logic and state, and widgets handle presentation only. This makes FDM suitable for production-scale projects, easy to maintain, and flexible enough to support a wide range of use cases such as inventory selection, ability wheels, tool selection interfaces."
+title: 'Overview'
 ---
 
-## Setting up
+# Flexible Directional Menu
 
-Get your documentation site up and running in minutes.
+A modular, data-driven, AAA-style directional selection menu system for Unreal Engine.
 
-<Card title="Start here" icon="rocket" horizontal href="/quickstart">
-  Follow our quickstart guide.
-</Card>
+## Overview
 
-## Make it yours
+Flexible Directional Menu (FDM) is a modular, data-driven, and fully extensible directional selection system designed for Unreal Engine projects. It enables developers to build complex directional menus similar to those found in modern AAA titles, while remaining fully customizable and decoupled from game logic and UI layout. The system is implemented **entirely in Blueprints** and is compatible with Unreal Engine **5.1 and above**.
 
-Design a docs site that looks great and empowers your users.
+FDM is designed for both single-player and multiplayer projects. **The menu system itself does not perform any network replication by default**, allowing it to be safely used in networked environments while leaving authoritative state and replication control to the game’s own logic. Developers can freely integrate FDM with replicated inventory, ability, or interaction systems as needed.
 
-<Columns cols={2}>
-  <Card title="Edit locally" icon="pen-to-square" href="/development">
-    Edit your docs locally and preview them in real time.
-  </Card>
-  <Card title="Customize your site" icon="palette" href="/essentials/settings">
-    Customize the design and colors of your site to match your brand.
-  </Card>
-  <Card title="Set up navigation" icon="map" href="/essentials/navigation">
-    Organize your docs to help users find what they need and succeed with your product.
-  </Card>
-  <Card title="API documentation" icon="terminal" href="/api-reference/introduction">
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
+The system follows a strict separation of concerns: gameplay data defines what appears in the menu, the component controls logic and state, and widgets handle presentation only. This makes FDM suitable for production-scale projects, easy to maintain, and flexible enough to support a wide range of use cases such as inventory selection, ability wheels, tool selection interfaces.
 
-## Create beautiful pages
+It is designed to be:
 
-Everything you need to create world-class documentation.
+- Unreal Engine **5.1+** compatible
+- Blueprint-only, no C++ required
+- Modular, data-driven architecture
+- Supports gamepad, keyboard, and custom input mappings
+- Easily integrates with inventory, ability, or interaction systems
+- Runtime-modifiable
+- Easily extendable
 
-<Columns cols={2}>
-  <Card title="Write with MDX" icon="pen-fancy" href="/essentials/markdown">
-    Use MDX to style your docs pages.
-  </Card>
-  <Card title="Code samples" icon="code" href="/essentials/code">
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card title="Images" icon="image" href="/essentials/images">
-    Display images and other media.
-  </Card>
-  <Card title="Reusable snippets" icon="recycle" href="/essentials/reusable-snippets">
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+![image1](images/image1.png)
 
-## Need inspiration?
+FDM is not a static UI template — it is a system for managing, displaying, and interacting with dynamic menu entries at runtime.
 
-<Card title="See complete examples" icon="stars" href="https://mintlify.com/customers">
-  Browse our showcase of exceptional documentation sites.
-</Card>
+## Why / When Should I Use This System?
+
+Use Flexible Directional Menu when you need:
+
+- Directional equipment / ability selection (D-Pad style)
+- Data-driven UI placement instead of hardcoded UI layouts
+
+Do NOT use FDM if:
+
+- You only need a static inventory grid
+- You want a mouse-driven drag & drop inventory

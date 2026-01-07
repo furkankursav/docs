@@ -1,0 +1,71 @@
+WBP_FDM_MainHUD / your own gameplay HUD widget (Root)  
+|  
+ WBP_FDM_Widget  
+ │  
+ ├── DirectionGroup_Up (WBP_FDM_SlotContainerDirectionGroup)  
+ │   └── CarouselContainer_0 (WBP_FDM_CarouselSlotContainer)  
+ │       ├── EntrySlot_0 (WBP_FDM_EntrySlot)  
+ │       ├── EntrySlot_1  
+ │       └── EntrySlot_2  
+ │  
+ ├── DirectionGroup_Down (WBP_FDM_SlotContainerDirectionGroup)  
+ │   └── CarouselContainer_0  
+ │       ├── EntrySlot_0  
+ │       └── EntrySlot_1  
+ │  
+ ├── DirectionGroup_Left (WBP_FDM_SlotContainerDirectionGroup)  
+ │   └── CarouselContainer_0  
+ │       ├── EntrySlot_0  
+ │       └── EntrySlot_1  
+ │  
+ └── DirectionGroup_Right (WBP_FDM_SlotContainerDirectionGroup)  
+     ├── CarouselContainer_0  
+     │   ├── EntrySlot_0  
+     │   └── EntrySlot_1  
+     └── CarouselContainer_1  
+         ├── EntrySlot_0  
+         └── EntrySlot_1
+
+By default, Flexible Directional Menu spawns and manages its own main UI wrapper widget (`WBP_FDM_MainHUD`). This behavior is determined by the **Use System Defined Main Widget** boolean inside the primary config data asset.
+
+![image70](/images/image70.png)
+
+When this option is enabled, the system:
+
+- Spawns `WBP_FDM_MainHUD` during initialization,  
+- Adds it to the viewport,  
+- Retrieves the internal `WBP_FDM_Widget` instance from it and uses it as the menu UI.
+
+This setup is intended for quick integration and prototyping.
+
+However, in many projects you will already have a main HUD widget (e.g. a gameplay HUD showing health, loadout, objectives, etc.), and you may want the FDM menu to be embedded inside that existing widget instead of using the system-defined one.
+
+### Using Your Own Main / Wrapper / Root Widget
+
+To use your own main widget instead of `WBP_FDM_MainHUD`, follow these steps:
+
+#### Step 1 — Add `WBP_FDM_Widget` to your own HUD
+
+Inside your own main widget (for example `WBP_GameplayHUD`):
+
+- Add `WBP_FDM_Widget` as a child widget.  
+- Position and size it as desired (anchors, alignment, scale, etc.).  
+- Make sure it is created and added to the viewport as part of your normal HUD flow.
+
+#### Step 2 — Disable the system-defined main widget
+
+In your primary config data asset:
+
+- Set **Use System Defined Main Widget** to **false**.
+
+#### Step 3 — Implement the Component Owner Interface
+
+On the actor that owns the `AC_FDM_Component` (usually the Player Character or Player Controller):
+
+- Implement the `BPI_FDM_ComponentOwner` interface.  
+- Implement the function `Get FDM Widget`.  
+- Return the reference to the `WBP_FDM_Widget` instance that you added to your own HUD.
+
+![image71](/images/image71.png)
+
+This allows the component to retrieve and control the correct menu widget without knowing about your HUD structure.

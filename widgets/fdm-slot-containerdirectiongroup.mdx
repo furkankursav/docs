@@ -1,0 +1,43 @@
+---
+title: Slot Container Direction Group
+---
+
+`WBP_FDM_SlotContainerDirectionGroup` is just a layout helper widget used by `WBP_FDM_Widget` to organize and arrange multiple Slot Containers within a single direction.
+
+Each Direction Group represents one direction (Up, Down, Left, or Right) and acts as a visual container that holds one or more `WBP_FDM_SlotContainer` widgets.
+
+TL;DR: You do NOT need to touch this widget.
+
+#### Purpose
+
+Slot Containers must be arranged in a strict order (side-by-side or top-to-bottom) depending on their direction. To achieve this, each direction group internally uses a layout panel:
+
+- Horizontal Box for Left / Right directions  
+- Vertical Box for Up / Down directions  
+
+However, standard layout panels always insert children in the same logical direction:
+
+- Horizontal Box: left to right  
+- Vertical Box: top to bottom  
+
+For some directions (specifically Left and Down), this default ordering is visually inverted relative to the desired menu layout.
+
+#### Directional Layout Inversion
+
+To ensure correct visual ordering:
+
+- The Left direction group draws its containers in reverse horizontal order.  
+- The Down direction group draws its containers in reverse vertical order.
+
+This inversion ensures that containers visually expand outward from the central D-Pad reference, regardless of the underlying layout panel behavior.
+
+#### Responsibilities
+
+`WBP_FDM_SlotContainerDirectionGroup` is responsible for:
+
+- Hosting `WBP_FDM_SlotContainer` widgets for a specific direction  
+- Inserting containers into the correct layout panel (horizontal or vertical)  
+- Reversing insertion order when necessary (Left and Down)  
+- Maintaining consistent spacing and alignment per direction  
+
+It does not contain selection logic, gameplay logic, or slot-level behavior.

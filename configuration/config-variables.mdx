@@ -1,0 +1,99 @@
+---
+title: 'Config Variables'
+---
+
+### Variables in the Configuration Asset
+
+Every variable in this asset has a **tooltip/description** in blueprints. I will cover the only most important ones in this document.
+
+![image52](/images/image52.png)  
+![image53](/images/image53.png)
+
+#### Layout Data (GameplayTag -> S_FDM_LayoutData)
+
+Contains the layout configuration that maps layout tags to directions, container indices, and order.
+
+  ![image54](/images/image54.png)
+
+  This map defines where and how containers are going to position inside the menu layout.  
+
+  - **Key (Gameplay Tag):** Each Entry object also exposes a Gameplay Tag through its metadata (via an interface function), which determines which layout rule should be applied to that entry where it should be placed.  
+  - **Direction:** This is the answer to the question "In which direction should entries with this tag be placed?".  
+  - **Container Widget Class:** As I'll explain later in the documentation, I'm not adding a widget slot directly to the menu. I'm using a wrapper widget to store multiple slots in a container.  
+  - **Item Size:** The size of widgets that will be displayed at this location. When a widget is added to this location, it is automatically wrapped in a size box (`WBP_FDM_CarouselSlotContainer` does this).  
+  - **Show Empty Slots:** If enabled, if there is not any entry in this container, it spawns a widget from `EmptySlotsClass`, otherwise the container will be hidden.
+
+  ![image55](/images/image55.png)
+
+#### Default Entries
+
+A list of entries that are automatically added to the menu during initialization. The given classes must implement the `BPI_FDM_EntrySourceObject` interface.  
+  This is mainly useful for prototyping, demo scenes, or static setups. In production gameplay, entries are typically added dynamically from inventory, abilities, or game state instead.
+
+#### Auto Bind Navigation Mapping Context 
+
+For the system to recognize the navigation inputs, Navigation Mapping Context from the config file must be applied to player input. If you turn off this variable, you will need to call the “Bind Navigation Mapping Context” function within `AC_FDM_Component` manually.
+
+#### Padding to Center 
+
+Defines how far the first slot container in each direction is positioned away from the center.  
+  ![image56](/images/image56.png)  
+  Padding to Center is 0 in this screenshot
+
+  ![image57](/images/image57.png)  
+  Padding to Center is 50 in this screenshot
+
+#### Hide Center Texture While Changing Slot
+
+ If enabled, the center cross texture is hidden when the slot-switching (expand / carousel) mode is active.  
+  ![image58](/images/image58.png)  
+  ![image59](/images/image59.png)
+
+#### Center Texture Direction Map
+
+ Allows assigning different center textures depending on the currently focused direction (Up, Down, Left, Right).  
+
+  ![image60](/images/image60.png)![image61](/images/image61.png) ![image62](/images/image62.png)![image63](/images/image63.png)![image64](/images/image64.png)
+
+  If you want to use a material instead of texture, you can change this behavior in `WBP_FDM_Widget > Refresh Center Image Direction` function.
+
+#### Cycled Container Changing
+
+ When enabled, navigating beyond the last container will wrap around to the first, creating cyclic navigation. In the animations below, I’m just pressing the “Select Up” button multiple times. 
+ 
+ Turned Off 
+  ![image65](/images/image65.gif)  
+
+  Turned On
+  ![image66](/images/image66.gif)  
+
+#### Use Debounced Selection & Debounce Duration in Seconds
+
+ Applies a debounce delay before confirming a container or entry selection. This prevents rapid directional input from instantly triggering selection events while the user is still navigating.
+
+  For example let’s say you want to navigate to the 3rd container in the up direction, if Debounced Selection is disabled, 1st and 2nd container will also be considered as selected just for a very short time. Debounced Selection solves this problem. You must wait on an entry for “Debounce Duration in Seconds” before it is marked as selected.
+
+  | Focused | Appears selected on the UI side, but its selection has not yet been confirmed. (`On Entry Focused` event triggered) |
+  | :---: | :---- |
+  | Pending | Waiting for debounce |
+  | Selected | Confirmed active (`On Selected Entry Changed Event` fires and `On Entry Selected` interface function is called) |
+
+#### Padding Between Containers
+ Controls the distance between multiple containers within the same direction group.  
+  ![image67](/images/image67.png)
+
+#### Padding Between Slots
+
+ Defines the vertical or horizontal spacing between slots inside a container.  
+  ![image68](/images/image68.png)
+
+#### Change Slot Widget
+
+ Defines the widget class used to display the "hold to change slot" UI when a container contains multiple entries.  
+  ![image69](/images/image69.png)
+
+  There is a default widget for that in `FlexibleDirectionalMenu/Widgets/` called `WBP_FDM_ChangeSlotInputAction`. You can modify this widget or you can create your own widget. It must implement the `WBPI_FDM_SlotActionWidget`.
+
+#### Change Slot Hold Duration
+
+Specifies how long the user must hold the input before the slot switching mode becomes active.

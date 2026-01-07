@@ -1,0 +1,19 @@
+---
+title: WBP_FDM_Widget
+---
+
+`WBP_FDM_Widget` is the main UI entry point of the Flexible Directional Menu system. It is responsible for visualizing the menu state provided by `AC_FDM_Component` and coordinating all UI-level behavior such as layout, transitions, styling, and visibility.
+
+The widget acts as the bridge between the gameplay-facing component and the lower-level UI building blocks (`WBP_FDM_SlotContainer`, `WBP_FDM_Slot`, direction groups, and optional action/command widgets).
+
+- Creating and managing the directional UI structure (Up / Down / Left / Right)  
+- Mapping container locations to their corresponding UI containers  
+- Creating and initializing slot widgets for entries (through the appropriate container widgets)  
+- Reacting to component events such as:  
+  - Entry added / removed  
+  - Entry moved / swapped  
+  - Focus or selection changes  
+  - Slot-action (hold) state changes  
+- Controlling menu visibility (show/hide) including optional animations and auto-hide behavior  
+- Applying global style settings (colors, sizes, padding, theme presets)  
+- Positioning and refreshing auxiliary widgets (e.g., action prompts like “Change”, hold progress indicators, etc.)

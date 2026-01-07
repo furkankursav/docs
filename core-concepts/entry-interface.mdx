@@ -1,0 +1,24 @@
+---
+title: 'Entry Source Interface'
+---
+### BPI_FDM_EntrySourceObject (Blueprint Interface)
+
+Every object you add to the menu must implement this interface. 
+
+When you add your object to FDM, the **OnEntryAdded** interface function gets called.  
+![image20](/images/image20.png)
+
+when the entry is selected, the **OnEntrySelected** interface function gets called.  
+![image21](/images/image21.png)
+
+when the entry is unselected, the **OnEntryUnselected** interface function gets called  
+![image22](/images/image22.png)
+
+when the entry is removed from the FDM, the **OnEntryRemoved** interface function gets called.  
+![image23](/images/image23.png)
+
+and we have a function for debugging: **GetEntryDebugName**  
+![image24](/images/image24.png)
+
+and the most important interface function is **Get Entry Metadata**  
+![image25](/images/image25.png)
