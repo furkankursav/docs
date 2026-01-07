@@ -19,8 +19,8 @@ This interface has a single function:
 
 You should implement `BPI_FDM_ComponentOwner` if:
 
-- You are embedding `WBP_FDM_Widget` into your own main HUD (e.g. `WBP_GameplayHUD`),  
-- You have disabled **Use System Defined Main Widget** in the config,  
+- You are embedding `WBP_FDM_Widget` into your own main HUD (e.g. `WBP_GameplayHUD`),
+- You have disabled **Use System Defined Main Widget** in the config,
 - Or your UI hierarchy is custom and the component cannot automatically find the menu widget.
 
 In typical advanced UI setups, the project already has a main gameplay HUD widget that contains all major UI elements such as health, ammo, minimap, and other interface systems. In such cases, the Flexible Directional Menu widget is expected to be part of this main HUD rather than being created and added to the viewport by the component.
