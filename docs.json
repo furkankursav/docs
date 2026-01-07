@@ -9,118 +9,79 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting started",
-            "icon": "home",
-            "pages": [
-              "index",
-              "quickstart"
-            ]
-          },
-          {
-            "group": "Example Inventory",
-            "icon": "grid",
-            "pages": [
-              "example-inventory/example-inventory"
-            ]
-          },
-          {
-            "group": "Core Concepts",
-            "icon": "boxes",
-            "pages": [
-              "core-concepts/entry",
-              "core-concepts/entry-interface",
-              "core-concepts/entry-metadata",
-              "core-concepts/entry-location",
-              {
-                "group" : "FDM Component",
-                "pages": [
-                  "core-concepts/fdm-component-sub/overview",
-                  "core-concepts/fdm-component-sub/initialization",
-                  "core-concepts/fdm-component-sub/input-handling",
-                  "core-concepts/fdm-component-sub/location-placement",
-                  "core-concepts/fdm-component-sub/crud-operations",
-                  "core-concepts/fdm-component-sub/communication"
-                ]
-              },
-              "core-concepts/owner-interface"
-            ]
-          },
-          {
-            "group": "Configuation",
-            "icon": "gear",
-            "pages": [
-              "configuration/primary-config",
-              "configuration/config-variables"
-            ]
-          },
-          {
-            "group": "Widgets",
-            "icon": "book",
-            "pages": [
-              "widgets/hierarchy",
-              "widgets/fdm-widget",
-              "widgets/fdm-slot-containerdirectiongroup",
-              "widgets/fdm-slot-carouselcontainer",
-              "widgets/slot-widget"
-            ]
-          },
-          {
-            "group": "Support",
-            "icon": "bug",
-            "pages": [
-              "faq"
-            ]
-          },
-          {
-            "group": "Reference",
-            "icon": "book",
-            "pages": [
-              "public-api/fdm-api"
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Discord",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "See on Fab",
-      "href": "https://dashboard.mintlify.com"
+  "groups": [
+    {
+      "group": "Getting started",
+      "icon": "home",
+      "pages": ["index", "quickstart"]
+    },
+    {
+      "group": "Example Inventory",
+      "icon": "grid",
+      "pages": ["example-inventory/example-inventory"]
+    },
+    {
+      "group": "Core Concepts",
+      "icon": "boxes",
+      "pages": [
+        "core-concepts/entry",
+        "core-concepts/entry-interface",
+        "core-concepts/entry-metadata",
+        "core-concepts/entry-location",
+        {
+          "group": "FDM Component",
+          "pages": [
+            "core-concepts/fdm-component-sub/overview",
+            "core-concepts/fdm-component-sub/initialization",
+            "core-concepts/fdm-component-sub/input-handling",
+            "core-concepts/fdm-component-sub/location-placement",
+            "core-concepts/fdm-component-sub/crud-operations",
+            "core-concepts/fdm-component-sub/communication"
+          ]
+        },
+        "core-concepts/owner-interface"
+      ]
+    },
+    {
+      "group": "Configuation",
+      "icon": "gear",
+      "pages": ["configuration/primary-config", "configuration/config-variables"]
+    },
+    {
+      "group": "Widgets",
+      "icon": "book",
+      "pages": [
+        "widgets/hierarchy",
+        "widgets/fdm-widget",
+        "widgets/fdm-slot-containerdirectiongroup",
+        "widgets/fdm-slot-carouselcontainer",
+        "widgets/slot-widget"
+      ]
+    },
+    {
+      "group": "Support",
+      "icon": "bug",
+      "pages": ["faq"]
+    },
+    {
+      "group": "Reference",
+      "icon": "book",
+      "pages": ["public-api/fdm-api"]
     }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+  ]
+},
+"navbar": {
+  "links": [
+    {
+      "label": "Discord",
+      "href": "https://discord.gg/YOUR_INVITE_CODE",
+      "icon": "/icons/discord.svg"
+    },
+    {
+      "label": "Get on Fab",
+      "href": "https://fab.com",
+      "icon": "/icons/fab.svg"
     }
-  }
+  ]
+}
 }

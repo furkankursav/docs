@@ -1,4 +1,13 @@
+/* hiding the search bar */
 #search-bar-entry,
 #search-bar-entry-mobile {
   display: none;
+}
+
+/* all icons in Navbar */
+#navbar img {
+  width: 36px !important;
+  height: 36px !important;
+  max-width: none !important;
+  max-height: none !important;
 }
