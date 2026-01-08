@@ -1,4 +1,5 @@
 `AC_FDM_Component` communicates state changes to the other systems and UI using events such as:
+### Event Table
 
 | Event | Fired When | Typical Usage |
 | :---- | :---- | :---- |
@@ -7,17 +8,34 @@
 | On Entry Focused | An entry receive focus | UI Feedback |
 | On New Entry Added | A new entry added | UI Feedback |
 | On Entry Placements Changed | An entry location changed or an entry removed | UI Feedback |
-| On Switch Slot Menu Changed | Container opened or closed | Animation state changes and UI Feedback |
+| On Nested Mode Changed | When the user enters or leaves nested selection mode | Animation, camera or gameplay state changes and UI Feedback |
 | On Slot Action Started | Hold started | UI Feedback |
 | On Slot Action Progress | Holding in progress | UI Feedback |
 | On Slot Action Triggered | Holding successful | UI Feedback |
 | On Slot Action Completed | Holding finished and button released | UI Feedback |
 | On Slot Action Cancelled | Holding interrupted | UI Feedback |
+| On Menu Visibility Changed | When the widget visibility changes | UI Feedback |
+
+#### On Selected Entry Changed
 
 On Selected Entry Changed is the one of most important events. Because it gets triggered when the selected entry has changed.
 
 You can use this event to trigger specific actions like changing weapons, activating ability, activating Photo Mode etc.
 ![image48](/images/image48.png)
 
-or you can use the “On Entry Selected” interface event in the source object.
+or you can use the `On Entry Selected` interface event in the source object.
 ![image49](/images/image49.png)
+
+#### On Nested Mode Changed
+
+Another important event is `On Nested Mode Changed`. It's being triggered when you open and close a container.
+You can bind some gameplay & animation events to it. 
+<video
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="w-full aspect-video rounded-xl"
+  src="/videos/opening-container.mp4"
+></video>
+In this example, the animation blueprint and player camera reacts to `On Nested Mode Changed` event.
