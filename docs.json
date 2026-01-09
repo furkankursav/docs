@@ -34,6 +34,7 @@
             "core-concepts/fdm-component-sub/overview",
             "core-concepts/fdm-component-sub/initialization",
             "core-concepts/fdm-component-sub/input-handling",
+            "core-concepts/fdm-component-sub/navigation",
             "core-concepts/fdm-component-sub/location-placement",
             "core-concepts/fdm-component-sub/crud-operations",
             "core-concepts/fdm-component-sub/communication"
