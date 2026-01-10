@@ -69,14 +69,7 @@ Defines how far the first slot container in each direction is positioned away fr
 
 #### Use Debounced Selection & Debounce Duration in Seconds
 
- Applies a debounce delay before confirming a container or entry selection. This prevents rapid directional input from instantly triggering selection events while the user is still navigating.
-
-  For example let’s say you want to navigate to the 3rd container in the up direction, if Debounced Selection is disabled, 1st and 2nd container will also be considered as selected just for a very short time. Debounced Selection solves this problem. You must wait on an entry for “Debounce Duration in Seconds” before it is marked as selected.
-
-  | Focused | Appears selected on the UI side, but its selection has not yet been confirmed. (`On Entry Focused` event triggered) |
-  | :---: | :---- |
-  | Pending | Waiting for debounce |
-  | Selected | Confirmed active (`On Selected Entry Changed Event` fires and `On Entry Selected` interface function is called) |
+Already explained in [Debounce Mechanism](/core-concepts/fdm-component-sub/navigation#debounce-mechanism) section.
 
 #### Padding Between Containers
  Controls the distance between multiple containers within the same direction group.  
