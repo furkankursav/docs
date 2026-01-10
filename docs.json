@@ -30,6 +30,7 @@
         "core-concepts/entry-location",
         {
           "group": "FDM Component",
+          "icon": "star",
           "pages": [
             "core-concepts/fdm-component-sub/overview",
             "core-concepts/fdm-component-sub/initialization",

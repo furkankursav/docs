@@ -7,7 +7,7 @@ First of all, enabling logging and debugging in the Component may be helpful.
 However, since some logs are only written in Output Log, it will be useful to open it.
 ![image83](/images/image83.png)
 
-### Input & Visibility
+## Input & Visibility
 
 #### The menu does not appear when I press the input key.
 
@@ -53,7 +53,7 @@ Typically the Player Character or Player Controller — whichever owns the `AC_F
 - Verify that `GetEntryMetadata` returns a valid metadata struct.
 - Check that the Layout Tag in metadata exists in `Layout Data` in the config.
 
-### Layout & Placement
+## Layout & Placement
 
 #### My entry appears in the wrong container or direction
 
@@ -73,14 +73,14 @@ Typically the Player Character or Player Controller — whichever owns the `AC_F
 - Make sure animation logic is not running in Event Tick unnecessarily.
 - Avoid simultaneously driving position from animation and manual interpolation.
 
-### Selection
+## Selection
 
 #### Selection feels too fast / too sensitive or Selection triggers while navigating quickly between containers
 
 - Enable `Use Debounced Selection`.
 - Increase `Debounce Duration in Seconds`.
 
-### Performance
+## Performance
 
 #### Is this system expensive?
 
@@ -92,13 +92,13 @@ No — the menu only updates when:
 
 There is no heavy per-frame logic unless explicitly enabled by the user.
 
-### Networking
+## Networking
 
 #### Is it safe to use in multiplayer?
 
 This system is UI-side and non-replicated by default. It is safe for multiplayer, but entry and selection replication must be handled by the game.
 
-### Integration
+## Integration
 
 #### Can I use this with my own inventory system?
 
