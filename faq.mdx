@@ -4,7 +4,7 @@ title: 'FAQ & Troubleshooting'
 First of all, enabling logging and debugging in the Component may be helpful.
 ![image82](/images/image82.png)
 
-However, since some logs are only written in Output Log, it will be useful to open it.
+However, since some logs are only written in **Output Log**, it will be useful to open it.
 ![image83](/images/image83.png)
 
 ## Input & Visibility
@@ -72,6 +72,20 @@ Typically the Player Character or Player Controller — whichever owns the `AC_F
 - Reduce `Slot Interp Speed` or `Accordion Animation Interp Speed`.
 - Make sure animation logic is not running in Event Tick unnecessarily.
 - Avoid simultaneously driving position from animation and manual interpolation.
+
+## Appearance
+
+#### Why do some slot widgets ignore show/hide animations?
+
+This can happen if the slot uses a material with **Blend Mode** set to **Opacity Mask**.
+Opacity Mask materials do not always respond correctly to UI fade animations.
+To fix this, change the material’s Blend Mode to **Translucent**.
+
+#### Why doesn’t my icon size match the value I set in metadata?
+
+When a slot is added to the menu, it is automatically wrapped inside a **SizeBox** for layout control.
+If your icon appears smaller or larger than expected, this is likely due to the SizeBox scaling behavior.
+Instead of increasing the icon size in metadata, adjust the slot’s **Render Transform → Scale** value in metadata.
 
 ## Selection
 
