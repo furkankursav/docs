@@ -83,6 +83,11 @@
       "label": "Get on Fab",
       "href": "https://fab.com",
       "icon": "/icons/fab.svg"
+    },
+    {
+      "label": "Watch the Trailer",
+      "href": "https://youtu.be/84T-Vx5wa34",
+      "icon": "/icons/youtube.svg"
     }
   ]
 }
