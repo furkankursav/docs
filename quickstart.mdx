@@ -5,19 +5,27 @@ icon: 'zap'
 
 After you added the asset package to your project, follow these steps to make it work:
 
-### 1. Add AC_FDM_Component
+### 1. Import the Layout Tags
+
+Open your project's gameplay tag settings from `Edit > Project Settings > Gameplay Tags`
+![image88](images/image88.png)
+
+add `DT_FDM_LayoutTags` to your `Gameplay Tag Table List`.
+![image89](images/image89.png)
+
+### 2. Add AC_FDM_Component
 
 Add `AC_FDM_Component` to your **Player Character** or **Player Controller**.
 
 ![image2](images/image2.png)
 
-### 2. Assign a Config asset
+### 3. Assign a Config asset
 
 Assign a Config asset for the component.
 
 ![image3](images/image3.png)
 
-### 3. Add Input Actions
+### 4. Add Input Actions
 
 Add the following input actions:
 
@@ -39,7 +47,7 @@ Then call FDM Directional Input function on Triggered Event with corresponding d
 | IA_FDM_SelectLeft | FDM Directional Input (Left) |
 | IA_FDM_SelectRight | FDM Directional Input (Right) |
 
-### 4. Optional: Example Inventory
+### 5. Optional: Example Inventory
 
 Add `AC_FDM_ExampleInventoryComponent` and assign a starting item asset.
 
@@ -50,13 +58,13 @@ Then initialize the inventory on Begin Play.
 
 ![image8](images/image8.png)
 
-### 5. Initialize the FDM Component
+### 6. Initialize the FDM Component
 
 Call **Initialize FDM Component** when your character/controller is ready (typically on Begin Play).
 
 ![image9](images/image9.png)
 
-### 6. Use your own system
+### 7. Use your own system
 
 Open the blueprint of the object (must derive from `UObject`) and implement the `BPI_FDM_EntrySourceObject` interface.
 
@@ -66,7 +74,7 @@ The most important function is `Get Entry Metadata`.
 
 ![image11](images/image11.png)
 
-### 7. Add entries
+### 8. Add entries
 
 Add entries by using the **Add New Entry** function.
 

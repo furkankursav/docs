@@ -13,7 +13,7 @@
     {
       "group": "Getting started",
       "icon": "home",
-      "pages": ["index", "quickstart"]
+      "pages": ["index", "quickstart", "example-levels"]
     },
     {
       "group": "Example Inventory",
