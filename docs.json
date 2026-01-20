@@ -54,7 +54,10 @@
       "icon": "book",
       "pages": [
         "widgets/hierarchy",
-        "widgets/fdm-widget",
+        {
+          "group": "WBP_FDM_Widget",
+          "pages": ["widgets/fdm-widget", "widgets/visibility"]
+        },
         "widgets/fdm-slot-containerdirectiongroup",
         "widgets/fdm-slot-carouselcontainer",
         "widgets/slot-widget"

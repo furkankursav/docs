@@ -1,0 +1,28 @@
+---
+title: 'Visibility'
+---
+
+Widget's visibility is controlled by `AC_FDM_Component`.
+
+# Setting the Visibility
+
+You can use `Request Show Menu`
+![image95](/images/image95.png)
+and `Request Hide Menu`
+![image96](/images/image96.png)
+functions to set widget visibility.
+
+When to menu visibility changes, `On Menu Visibility Changed` event gets triggered.
+![image97](/images/image97.png)
+
+# Default Visibility And Auto Hiding
+
+You can configure these settings in your configuration data asset.
+![image98](/images/image98.png)
+
+# Animations
+
+When the showing or hiding function gets called, `AC_FDM_Component` redirects this request to `WBP_FDM_Widget` via **interface functions**.
+![image99](/images/image99.png)
+You can set **playpack speed** in `WBP_FDM_Widget` and you can create your own **show** and **hide** animations.
+![image100](/images/image100.png)

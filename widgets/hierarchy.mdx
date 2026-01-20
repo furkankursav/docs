@@ -32,13 +32,14 @@ By default, Flexible Directional Menu spawns and manages its own main UI wrapper
 
 When this option is enabled, the system:
 
-- Spawns `WBP_FDM_MainHUD` during initialization,  
-- Adds it to the viewport,  
+- Spawns `WBP_FDM_MainHUD` during initialization,
+- Adds it to the viewport,
 - Retrieves the internal `WBP_FDM_Widget` instance from it and uses it as the menu UI.
 
 This setup is intended for quick integration and prototyping.
 
-However, in many projects you will already have a main HUD widget (e.g. a gameplay HUD showing health, loadout, objectives, etc.), and you may want the FDM menu to be embedded inside that existing widget instead of using the system-defined one.
+However, in many projects you will already have a main HUD widget (e.g. a gameplay HUD showing health, loadout, objectives, etc.),
+and you may want the FDM menu to be embedded inside that existing widget instead of using the system-defined one.
 
 ### Using Your Own Main / Wrapper / Root Widget
 
@@ -48,9 +49,10 @@ To use your own main widget instead of `WBP_FDM_MainHUD`, follow these steps:
 
 Inside your own main widget (for example `WBP_GameplayHUD`):
 
-- Add `WBP_FDM_Widget` as a child widget.  
-- Position and size it as desired (anchors, alignment, scale, etc.).  
-- Make sure it is created and added to the viewport as part of your normal HUD flow.
+- Add `WBP_FDM_Widget` as a child widget.
+- Position and size it as desired (anchors, alignment, scale, etc.). You can wrap it with **Size Box** and **Scale Box**.
+![image94](/images/image94.png)
+- Make sure the wrapper widget is created and added to the viewport as part of your normal HUD flow.
 
 #### Step 2 — Disable the system-defined main widget
 
@@ -62,8 +64,8 @@ In your primary config data asset:
 
 On the actor that owns the `AC_FDM_Component` (usually the Player Character or Player Controller):
 
-- Implement the `BPI_FDM_ComponentOwner` interface.  
-- Implement the function `Get FDM Widget`.  
+- Implement the `BPI_FDM_ComponentOwner` interface.
+- Implement the function `Get FDM Widget`.
 - Return the reference to the `WBP_FDM_Widget` instance that you added to your own HUD.
 
 ![image71](/images/image71.png)
