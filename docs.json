@@ -71,7 +71,7 @@
     {
       "group": "Reference",
       "icon": "book",
-      "pages": ["public-api/fdm-api"]
+      "pages": ["public-api/fdm-api", "changelog"]
     }
   ]
 },
